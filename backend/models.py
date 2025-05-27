@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Float
+from sqlalchemy import Column, String, Float, Date
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -35,7 +35,7 @@ class OptionsChainData_0_5_0(Base):
     oi = Column(Float, nullable=False)
     delta = Column(Float, nullable=False)
     theta = Column(Float, nullable=False)
-    Date = Column(String, nullable=False)
+    Date = Column(Date, nullable=False)
     Time = Column(String, nullable=False)
 
 

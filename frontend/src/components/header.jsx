@@ -4,6 +4,7 @@ import '../styles/header.css';
 const Header = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [niftyData, setNiftyData] = useState(null);
+  const [marketCap, setMarketCap] = useState(null);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -11,25 +12,40 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    const mockNiftyData = {
-      lastPrice: 22496.20,
-      change: -83.00,
-      pChange: -0.37,
+    const fetchNiftyData = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/nse-market-status');
+        const json = await response.json();
+
+        const marketData = json.marketState.find(
+          item => item.market === 'Capital Market' && item.index === 'NIFTY 50'
+        );
+
+        const marketCapData = json.marketcap?.marketCapinCRRupeesFormatted;
+
+        if (marketData) {
+          const lastPrice = parseFloat(marketData.last);
+          const variation = parseFloat(marketData.variation);
+          const percentChange = parseFloat(marketData.percentChange);
+
+          setNiftyData({
+            lastPrice,
+            change: variation,
+            pChange: percentChange,
+          });
+        }
+
+        if (marketCapData) {
+          setMarketCap(marketCapData);
+        }
+
+      } catch (error) {
+        console.error('Failed to fetch NIFTY data:', error);
+      }
     };
 
-    setNiftyData(mockNiftyData);
-
-    const interval = setInterval(() => {
-      const randomChange = (Math.random() * 100 - 50).toFixed(2);
-      const lastPrice = 22496.2 + parseFloat(randomChange);
-      const pChange = ((randomChange / 22496.2) * 100).toFixed(2);
-      setNiftyData({
-        lastPrice,
-        change: parseFloat(randomChange),
-        pChange,
-      });
-    }, 60000);
-
+    fetchNiftyData();
+    const interval = setInterval(fetchNiftyData, 5 * 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -63,10 +79,9 @@ const Header = () => {
       </div>
 
       <div className="d-flex align-items-center gap-3">
-        <img src="logo_nifty50.png" alt="NSE Logo" className="nse-logo" />
+        
         <div className="vr" />
-        {/* ...NSE data and datetime... */}
-
+        <img src="logo_nifty50.png" alt="NSE Logo" className="nse-logo" />
         {/* NSE Data */}
         {niftyData && (
           <div className="nifty-data d-flex flex-column align-items-end">
@@ -80,12 +95,16 @@ const Header = () => {
               className={niftyData.change > 0 ? 'text-success' : 'text-danger'}
             >
               {niftyData.change > 0 ? '+' : ''}
-              {niftyData.change.toFixed(2)} ({niftyData.pChange}%)
+              {niftyData.change.toFixed(2)} ({niftyData.pChange.toFixed(2)}%)
             </span>
+            {marketCap && (
+              <span className="market-cap small text-muted">
+                Mkt Cap: ₹{marketCap} Cr
+              </span>
+            )}
           </div>
         )}
 
-        {/* Vertical Line */}
         <div className="vr"></div>
 
         {/* Date & Time */}
