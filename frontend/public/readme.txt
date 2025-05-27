@@ -1,0 +1,5 @@
+- Select Instrument: Choose NIFTY or BANKNIFTY.
+- Choose Option Type: Call or Put.
+- Frequency: Time intervals for price data.
+- Data Type: Price or Options Chain.
+- Choose date range and click Fetch.

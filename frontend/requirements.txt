@@ -1,0 +1,6 @@
+react-icons 
+react-bootstrap 
+bootstrap 
+react-plotly.js 
+axios 
+lucide-react

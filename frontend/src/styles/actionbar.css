@@ -1,0 +1,202 @@
+.action-bar {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0; /* Slightly wider padding */
+  background-color: #ffffff;
+  border-radius: 14px; /* slightly more rounded */
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1); /* stronger shadow for subtle depth */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #212529;
+  user-select: none;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border: 1px solid #e0e0e0; /* subtle border for structure */
+  transition: box-shadow 0.3s ease;
+}
+
+.best-view-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  z-index: 9999;
+  padding: 1.5rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-bar:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Left section */
+.left-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* increased gap */
+  flex-wrap: wrap;
+  min-width: 280px;
+}
+
+.underlying-index {
+  font-size: 1.1rem;
+  white-space: nowrap;
+  color: #0d47a1; /* navy blue for label */
+  font-weight: 600;
+}
+
+.index-value {
+  font-weight: 700;
+  margin-left: 0.3rem;
+  color: #1a237e; /* deeper navy */
+}
+
+.as-on {
+  font-size: 0.85rem;
+  color: #6c757d; /* medium gray */
+  margin-left: 0.5rem;
+  font-style: italic;
+}
+
+/* Refresh button */
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  color: #0d47a1;
+  user-select: none;
+  outline-offset: 2px;
+  outline-color: transparent;
+  outline-style: solid;
+}
+
+.btn-icon-text:focus,
+.btn-icon-text:hover {
+  background-color: #0d47a1;
+  color: #fff;
+  box-shadow: 0 0 8px #0d47a1cc;
+  outline-color: #0d47a1;
+}
+
+.btn-icon-text .icon {
+  font-size: 1.2rem;
+}
+
+/* Right section */
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  min-width: 350px;
+  justify-content: flex-end;
+}
+
+/* Terms of Use, Best View, Download button styles */
+.terms-btn,
+.bestview-btn,
+.download-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+}
+
+.terms-btn,
+.bestview-btn {
+  color: #1565c0;
+  border-color: #1565c0;
+  background-color: #f1f5fb;
+}
+
+.terms-btn:hover,
+.bestview-btn:hover {
+  background-color: #1565c0;
+  color: #fff;
+  box-shadow: 0 0 10px #1565c0cc;
+  border-color: #1565c0;
+}
+
+.download-btn {
+  color: #2e7d32;
+  border-color: #2e7d32;
+  background-color: #e8f5e9;
+}
+
+.download-btn:hover {
+  background-color: #2e7d32;
+  color: #fff;
+  box-shadow: 0 0 10px #2e7d32cc;
+  border-color: #2e7d32;
+}
+
+/* Icon sizes inside buttons */
+.terms-btn .icon,
+.bestview-btn .icon,
+.download-btn .icon {
+  font-size: 1.2rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .action-bar {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .left-section,
+  .right-section {
+    min-width: 100%;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+/* Toggle View button styles */
+.toggle-view-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+
+  /* Choose a distinct but harmonious color, e.g., deep purple */
+  color: #6a1b9a;
+  border-color: #6a1b9a;
+  background-color: #f3e5f5;
+}
+
+.toggle-view-btn:hover {
+  background-color: #6a1b9a;
+  color: #fff;
+  box-shadow: 0 0 10px #6a1b9acc;
+  border-color: #6a1b9a;
+}

@@ -1,0 +1,44 @@
+.data-table-container {
+  overflow-x: auto;
+  margin-top: -5px !important; 
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* So table looks nice horizontally */
+}
+
+.data-table thead tr {
+  background-color: #001f5b; /* Navy blue */
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.even-row {
+  background-color: #f5f7fa;
+}
+
+.odd-row {
+  background-color: #fff;
+}
+
+.positive {
+  color: #2e7d32; /* green */
+  font-weight: 600;
+}
+
+.negative {
+  color: #c62828; /* red */
+  font-weight: 600;
+}

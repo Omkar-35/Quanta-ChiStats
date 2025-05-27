@@ -1,0 +1,54 @@
+/* Fetch button - navy blue gradient and shadows */
+form button {
+  padding: 0.5rem 1.5rem !important;
+  font-size: 1rem !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #001f4d, #003366) !important; /* navy blues */
+  border: none !important;
+  color: #fff !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 77, 0.4) !important;
+}
+
+form button:hover {
+  background: linear-gradient(135deg, #003366, #001a4d) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 77, 0.6) !important;
+}
+
+form button:active {
+  background-color: #001533 !important;
+  transform: scale(0.98) !important;
+}
+
+/* Read Me styling */
+.readme-link {
+  cursor: pointer;
+  color: black;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Underline animation */
+.readme-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: navy;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.readme-link:hover {
+  color: #001f4d; /* navy */
+}
+
+.readme-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}

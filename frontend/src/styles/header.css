@@ -1,0 +1,105 @@
+/* Existing styles (unchanged) */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+.center-logo {
+  position: absolute;
+  left: 38%;
+  transform: translateX(-50%);
+}
+
+/* Ensure space below the header is added in layout */
+body,
+main,
+.app-content {
+  padding-top: 90px; /* Adjust based on actual header height */
+}
+
+
+.logo h3 {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 900;
+  font-size: 2.4rem;
+  background: linear-gradient(90deg, #0a0a0a, #1e2a38, #0a0a0a); /* deep black to navy blue */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: darkPulse 2s infinite ease-in-out, shine 4s infinite linear;
+  letter-spacing: 1px;
+}
+
+@keyframes darkPulse {
+  0%, 100% {
+    text-shadow: 0 0 4px #1f1f1f44, 0 0 8px #1e2a3877;
+  }
+  50% {
+    text-shadow: 0 0 6px #1e2a38aa, 0 0 10px #2c3e5077;
+  }
+}
+
+
+.nse-logo {
+  height: 45px;
+  width: 60px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.datetime {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #495057;
+  text-align: right;
+}
+
+.datetime .date {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #343a40;
+}
+
+.datetime .time {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+.nifty-data {
+  margin-top: 6px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.last-price {
+  margin-right: 6px;
+}
+
+.text-success {
+  color: #28a745; /* green */
+}
+
+.text-danger {
+  color: #dc3545; /* red */
+}
+
+.vr {
+  width: 1px;
+  background-color: #ced4da;
+  height: 90 px;
+  align-self: stretch;
+}
+
+.nse-logo {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
