@@ -1,7 +1,6 @@
 .data-table-container {
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
   margin: 0 auto;
   padding: 0.5rem;
   background-color: #f8fafc;
@@ -65,7 +64,7 @@
 
 .data-table tbody tr:hover {
   background-color: #e8f4fd;
-  transform: scale(1.03);
+  transform: scale(1.01);
   box-shadow: 0 6px 12px rgba(0, 31, 91, 0.1);
   cursor: pointer;
 }
