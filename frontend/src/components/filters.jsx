@@ -121,6 +121,7 @@ const Filters = ({ onFetch = () => {} }) => {
   return (
     <>
       <div className="filters-container">
+        {/* Single row with all filters */}
         <div className="filters-row">
           <div className="filter-group">
             <label htmlFor="instrument">Instrument</label>
@@ -168,9 +169,7 @@ const Filters = ({ onFetch = () => {} }) => {
               <option value="5">5 min</option>
             </select>
           </div>
-        </div>
 
-        <div className="filters-row">
           <div className='date-range'>
             <div className="filter-group">
               <label htmlFor="startDate">Start Date</label>
@@ -211,12 +210,12 @@ const Filters = ({ onFetch = () => {} }) => {
               onClick={handleClearFilters}
               title="Clear all filters and load default data"
             >
-              <RotateCcw size={16} />
+              <RotateCcw size={14} />
               <span>Clear</span>
             </button>
             
             <span onClick={handleReadMeOpen} className="readme-link">
-              <Info size={16} />
+              <Info size={14} />
               <span>Read Me</span>
             </span>
           </div>

@@ -33,10 +33,11 @@
 
 .data-table th,
 .data-table td {
-  padding: 0.75rem 1rem;
+  padding: 0.4rem 0.8rem;
   text-align: center;
   border-bottom: 1px solid #ddd;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  line-height: 1.2;
 }
 
 .even-row {
@@ -179,13 +180,13 @@
   
   .data-table th,
   .data-table td {
-    padding: 0.5rem 0.75rem;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
   }
 }
 
 .table-wrapper {
-  max-height: calc(100vh - 200px); /* Adjust based on your navbar + filters height */
-  overflow-y: auto;
+  /* Removed max-height restriction to show all 30 rows at once */
   border: 1px solid #e0e0e0;
   border-radius: 8px;
 }
@@ -199,7 +200,7 @@
 
 /* Ensure proper spacing when in best view mode */
 .App.best-view .table-wrapper {
-  max-height: calc(100vh - 100px); /* Less height reduction when navbar is hidden */
+  /* Removed height restriction for best view mode as well */
 }
 
 
