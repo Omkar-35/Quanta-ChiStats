@@ -65,7 +65,7 @@ const Header = () => {
         <img
           src="/chistats.png"
           alt="Chistats Logo"
-          style={{ height: '40px', width: 'auto' }}
+          style={{ height: '30px', width: 'auto' }}
         />
       </div>
 
@@ -74,7 +74,7 @@ const Header = () => {
         <img
           src="/quanta.png"
           alt="Quanta Logo"
-          style={{ height: '70px', width: 'auto' }}
+          style={{ height: '100px', width: 'auto' }}
         />
       </div>
 

@@ -315,6 +315,50 @@
   font-size: 0.875rem;
 }
 
+/* Add this to your existing filters.css file */
+
+.clear-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  background-color: #4b5563;
+  transform: translateY(-1px);
+}
+
+.clear-button:active {
+  transform: translateY(0);
+}
+
+.clear-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.actions-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Update fetch button to match */
+.fetch-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
 
 /* Animations */
 @keyframes fadeIn {

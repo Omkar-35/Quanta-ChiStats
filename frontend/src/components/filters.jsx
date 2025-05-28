@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Info } from 'lucide-react';
+import { Info, RotateCcw } from 'lucide-react';
 import '../styles/filters.css';
 
 const Filters = ({ onFetch = () => {} }) => {
   const [instrument, setInstrument] = useState('NIFTY');
   const [optionType, setOptionType] = useState('Call');
-  const [frequency, setFrequency] = useState('1');
-  const [dataType, setDataType] = useState('Price');
+  const [frequency, setFrequency] = useState('5');
+  const [dataType, setDataType] = useState('OptionsChain');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [readmeContent, setReadmeContent] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const buildFilterUrl = () => {
-    let baseUrl = 'http://127.0.0.1:8000/filter';
+    let baseUrl = 'http://localhost:8000/filter';
     
     // Add option type (lowercase for URL)
     baseUrl += `/${optionType.toLowerCase()}`;
     
-    // Add data type if it's options chain
+    // Add data type
     if (dataType === 'OptionsChain') {
       baseUrl += '/optionschain';
+    } else {
+      baseUrl += '/price';
     }
     
-    // Add frequency
+    // Add frequency (remove 'min' if present)
     baseUrl += `/${frequency.replace('min', '')}`;
     
     // Add date filters if both dates are selected
@@ -40,10 +43,63 @@ const Filters = ({ onFetch = () => {} }) => {
     return baseUrl;
   };
 
-  const handleFetch = () => {
-    const url = buildFilterUrl();
+  const getDefaultUrl = () => {
+    return 'http://localhost:8000/call/optionschain/5';
+  };
+
+  const handleFetch = async () => {
+    try {
+      setLoading(true);
+      const url = buildFilterUrl();
+      
+      // Pass the URL and filter data to parent component
+      onFetch({
+        url,
+        filters: {
+          instrument,
+          optionType,
+          frequency,
+          dataType,
+          startDate,
+          endDate,
+        }
+      });
+    } catch (error) {
+      console.error('Error building filter URL:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClearFilters = () => {
+    setInstrument('NIFTY');
+    setOptionType('Call');
+    setFrequency('5');
+    setDataType('OptionsChain');
+    setStartDate('');
+    setEndDate('');
+    
+    // Fetch default data
     onFetch({
-      url,
+      url: getDefaultUrl(),
+      filters: {
+        instrument: 'NIFTY',
+        optionType: 'Call',
+        frequency: '5',
+        dataType: 'OptionsChain',
+        startDate: '',
+        endDate: '',
+      }
+    });
+  };
+
+  const handleReadMeOpen = () => setShowModal(true);
+  const handleReadMeClose = () => setShowModal(false);
+
+  // Load default data when component mounts
+  useEffect(() => {
+    onFetch({
+      url: getDefaultUrl(),
       filters: {
         instrument,
         optionType,
@@ -53,10 +109,7 @@ const Filters = ({ onFetch = () => {} }) => {
         endDate,
       }
     });
-  };
-
-  const handleReadMeOpen = () => setShowModal(true);
-  const handleReadMeClose = () => setShowModal(false);
+  }, []);
 
   useEffect(() => {
     fetch('/readme.txt')
@@ -145,8 +198,21 @@ const Filters = ({ onFetch = () => {} }) => {
           </div>
 
           <div className="actions-group">
-            <button className="fetch-button" onClick={handleFetch}>
-              Fetch
+            <button 
+              className="fetch-button" 
+              onClick={handleFetch}
+              disabled={loading}
+            >
+              {loading ? 'Fetching...' : 'Fetch'}
+            </button>
+            
+            <button 
+              className="clear-button" 
+              onClick={handleClearFilters}
+              title="Clear all filters and load default data"
+            >
+              <RotateCcw size={16} />
+              <span>Clear</span>
             </button>
             
             <span onClick={handleReadMeOpen} className="readme-link">

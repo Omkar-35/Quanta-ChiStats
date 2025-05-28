@@ -13,8 +13,13 @@
 
 .center-logo {
   position: absolute;
-  left: 40%;
+  left: 21%;
   transform: translateX(-50%);
+}
+
+.left-logo {
+  margin-top: -40px;
+  margin-left: -5px;
 }
 
 /* Ensure space below the header is added in layout */
