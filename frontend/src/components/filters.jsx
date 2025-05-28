@@ -236,9 +236,9 @@ const Filters = ({ onFetch = () => {} }) => {
                 </pre>
               </div>
             </div>
-            <div className="modal-footer">
+            {/* <div className="modal-footer">
               <button onClick={handleReadMeClose}>Close</button>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

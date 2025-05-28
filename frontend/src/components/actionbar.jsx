@@ -4,7 +4,7 @@ import '../styles/actionbar.css';
 import { FaSyncAlt, FaFileCsv, FaGavel } from 'react-icons/fa';
 import { FiMaximize } from 'react-icons/fi';
 
-const ActionBar = ({ viewMode, onToggleView, isBestView, onToggleBestView }) => {
+const ActionBar = ({ viewMode, onToggleView, isBestView, onToggleBestView, filterUrl }) => {
   const [data, setData] = useState({
     underlyingIndex: 'NIFTY',
     value: 0,
@@ -36,7 +36,6 @@ const ActionBar = ({ viewMode, onToggleView, isBestView, onToggleBestView }) => 
   }
 };
 
-
   useEffect(() => {
     fetchLiveData();
     const interval = setInterval(fetchLiveData, 5 * 60 * 1000); // every 5 minutes
@@ -45,12 +44,25 @@ const ActionBar = ({ viewMode, onToggleView, isBestView, onToggleBestView }) => 
 
   const handleDownloadCSV = async () => {
     try {
-      const response = await fetch('http://localhost:8000/call/optionschain/5');
-      if (!response.ok) throw new Error('Failed to fetch full data');
-      const fullData = await response.json();
-
+      // Use the filter URL if provided, otherwise use the default endpoint
+      const downloadUrl = filterUrl || 'http://localhost:8000/call/optionschain/5';
+      
+      console.log('Downloading CSV from:', downloadUrl); // Debug log
+      
+      const response = await fetch(downloadUrl);
+      if (!response.ok) throw new Error('Failed to fetch filtered data');
+      
+      let fullData = await response.json();
+      
+      // Handle different response structures (same as DataTable)
+      if (fullData && typeof fullData === 'object' && fullData.data) {
+        fullData = fullData.data;
+      }
+      
+      // Ensure we have an array
       if (!Array.isArray(fullData) || fullData.length === 0) {
         console.warn('No data available for download.');
+        alert('No data available for download with the current filters.');
         return;
       }
 
@@ -64,12 +76,13 @@ const ActionBar = ({ viewMode, onToggleView, isBestView, onToggleBestView }) => 
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
       const link = document.createElement('a');
       link.href = URL.createObjectURL(blob);
-      link.download = 'options_chain_data.csv';
+      link.download = 'filtered_options_data.csv';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } catch (error) {
       console.error('Error downloading CSV:', error);
+      alert('Error downloading CSV. Please try again.');
     }
   };
 

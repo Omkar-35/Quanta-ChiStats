@@ -321,18 +321,18 @@
 
 /* Add this to your existing filters.css file */
 .clear-button {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem; /* Increased from 0.25rem */
-  padding: 0.5rem 1.25rem; /* Increased padding */
-  background-color: #6b7280;
+  background: linear-gradient(135deg, #4299e1 0%, #001f5b 100%);
   color: white;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem; /* Increased padding */
   border: none;
-  border-radius: 6px;
+  border-radius: 0.75rem;
   cursor: pointer;
-  font-size: 0.8rem; /* Increased from 0.7rem */
-  font-weight: 500;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.25);
+  position: relative;
+  overflow: hidden;
+  font-size: 0.8rem; /* Increased from 0.75rem */
   height: 36px; /* Increased from 32px */
 }
 
