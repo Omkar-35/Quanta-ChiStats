@@ -3,12 +3,12 @@
   background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
   border-radius: 1rem;
   box-shadow: 0 8px 25px rgba(31, 38, 135, 0.15);
-  padding: 1.5rem;
+  padding: 1rem; /* Reduced from 1.5rem */
   margin-bottom: -5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(4px);
-  margin-top: 13px;
+  margin-top: 15px; /* Reduced from 13px */
 }
 
 .filters-container:hover {
@@ -21,12 +21,12 @@
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem; /* Reduced from 1rem */
 }
 
 .date-range {
   display: flex;
-  gap: 20px; /* Adjust this value to control spacing between Start and End Date */
+  gap: 15px; /* Reduced from 20px */
   flex-wrap: nowrap;
 }
 
@@ -35,29 +35,27 @@
 }
 
 .date-range input[type="date"] {
-  width: 300px !important; /* Increase or decrease as needed */
+  width: 280px !important; /* Reduced from 300px */
 }
-
 
 .filters-row:last-child {
   margin-bottom: 0;
 }
-
 
 /* Filter group styling */
 .filter-group {
   display: flex;
   flex-direction: column;
   flex: 1;
-  min-width: 180px;
+  min-width: 160px; /* Reduced from 180px */
   position: relative;
 }
 
 .filter-group label {
-  font-size: 0.875rem;
+  font-size: 0.8rem; /* Reduced from 0.875rem */
   font-weight: 600;
   color: #2d3748;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.375rem; /* Reduced from 0.5rem */
   transition: color 0.3s ease;
   text-align: center;
 }
@@ -68,15 +66,16 @@
   background: #ffffff;
   border: 2px solid #e2e8f0;
   border-radius: 0.75rem;
-  padding: 0.625rem 2rem 0.625rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.5rem 1.75rem 0.5rem 0.875rem; /* Reduced vertical padding */
+  font-size: 0.8rem; /* Reduced from 0.875rem */
   color: #1a202c;
   cursor: pointer;
   transition: all 0.3s ease;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%232d3748'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
-  background-size: 1rem;
+  background-size: 0.875rem; /* Reduced from 1rem */
+  height: 38px; /* Fixed height for consistency */
 }
 
 .filter-group select:hover {
@@ -97,11 +96,12 @@
   background: #ffffff;
   border: 2px solid #e2e8f0;
   border-radius: 0.75rem;
-  padding: 0.625rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.5rem 0.875rem; /* Reduced vertical padding */
+  font-size: 0.8rem; /* Reduced from 0.875rem */
   color: #1a202c;
   transition: all 0.3s ease;
-  max-width: 280px;
+  max-width: 260px; /* Reduced from 280px */
+  height: 38px; /* Fixed height for consistency */
 }
 
 .filter-group input[type="date"]:hover {
@@ -121,7 +121,7 @@
 .actions-group {
   display: flex;
   align-items: flex-end;
-  gap: 1.25rem;
+  gap: 1rem; /* Reduced from 1.25rem */
   margin-left: auto;
 }
 
@@ -130,7 +130,7 @@
   background: linear-gradient(135deg, #4299e1 0%, #001f5b 100%);
   color: white;
   font-weight: 600;
-  padding: 0.75rem 2rem;
+  padding: 0.6rem 1.5rem; /* Reduced vertical padding */
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
@@ -138,6 +138,8 @@
   box-shadow: 0 4px 12px rgba(66, 153, 225, 0.25);
   position: relative;
   overflow: hidden;
+  font-size: 0.875rem; /* Explicit font size */
+  height: 38px; /* Fixed height for consistency */
 }
 
 .fetch-button::before {
@@ -174,12 +176,12 @@
 .readme-link {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.375rem; /* Reduced from 0.5rem */
   color: #4a5568;
-  font-size: 0.875rem;
+  font-size: 0.8rem; /* Reduced from 0.875rem */
   font-weight: 500;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.375rem; /* Reduced from 0.5rem */
   border-radius: 0.5rem;
   transition: all 0.3s ease;
 }
@@ -216,7 +218,6 @@
   animation: slideUp 0.3s ease;
   font-family:'Times New Roman', Times, serif
 }
-
 
 .modal-header {
   display: flex;
@@ -316,20 +317,20 @@
 }
 
 /* Add this to your existing filters.css file */
-
 .clear-button {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
+  gap: 4px; /* Reduced from 6px */
+  padding: 0.6rem 1.25rem; /* Reduced vertical padding */
   background-color: #6b7280;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.8rem; /* Reduced from 14px */
   font-weight: 500;
   transition: all 0.2s ease;
+  height: 38px; /* Fixed height for consistency */
 }
 
 .clear-button:hover {
@@ -350,7 +351,7 @@
 .actions-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px; /* Reduced from 12px */
 }
 
 /* Update fetch button to match */
@@ -381,7 +382,7 @@
 @media (max-width: 768px) {
   .filters-row {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem; /* Reduced from 1rem */
   }
   
   .filter-group {
@@ -390,7 +391,7 @@
   
   .actions-group {
     margin-left: 0;
-    margin-top: 1rem;
+    margin-top: 0.75rem; /* Reduced from 1rem */
     width: 100%;
     justify-content: space-between;
   }

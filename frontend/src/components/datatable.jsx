@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { AlertCircle, Loader2, TrendingUp } from "lucide-react";
+import { AlertCircle, Loader2, TrendingUp, ChevronLeft, ChevronRight } from "lucide-react";
 import "../styles/datatable.css";
 
 const DataTable = ({ filterUrl, activeFilters }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalRecords, setTotalRecords] = useState(0);
+  const rowsPerPage = 30;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,10 +35,15 @@ const DataTable = ({ filterUrl, activeFilters }) => {
         // Ensure we have an array
         if (Array.isArray(responseData)) {
           setData(responseData);
+          setTotalRecords(responseData.length); // Set total records from the full dataset
         } else {
           console.warn('Unexpected data format:', responseData);
           setData([]);
+          setTotalRecords(0);
         }
+        
+        // Reset to first page when new data is fetched
+        setCurrentPage(1);
         
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -64,6 +72,34 @@ const DataTable = ({ filterUrl, activeFilters }) => {
       fetchData();
     }
   }, [filterUrl]);
+
+  // Pagination functions
+  const getCurrentPageData = () => {
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    return data.slice(startIndex, endIndex);
+  };
+
+  const totalPages = Math.ceil(totalRecords / rowsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+
+  const handleRecords = () => {
+    const startRecord = (currentPage - 1) * rowsPerPage + 1;
+    const endRecord = Math.min(currentPage * rowsPerPage, totalRecords);
+    let records = ` Showing ${startRecord}-${endRecord} of ${totalRecords} records`;
+    return records
+  };
 
   const formatNumber = (num) => {
     if (num === undefined || num === null) return "-";
@@ -121,7 +157,9 @@ const DataTable = ({ filterUrl, activeFilters }) => {
 
   const getTableSubtitle = () => {
     if (!activeFilters) {
-      return "Call Options Data for every 5 minutes";
+      const startRecord = (currentPage - 1) * rowsPerPage + 1;
+      const endRecord = Math.min(currentPage * rowsPerPage, totalRecords);
+      return `Call Options Data for every 5 minutes | Showing ${startRecord}-${endRecord} of ${totalRecords} records`;
     }
     
     const { frequency, startDate, endDate } = activeFilters;
@@ -131,7 +169,7 @@ const DataTable = ({ filterUrl, activeFilters }) => {
     if (startDate && endDate) {
       subtitle += ` from ${startDate} to ${endDate}`;
     } else {
-      subtitle += " | Real-time data";
+      subtitle += " | Latest Data";
     }
     
     return subtitle;
@@ -240,9 +278,11 @@ const DataTable = ({ filterUrl, activeFilters }) => {
           <TrendingUp className="header-icon" />
           <h2 className="table-title">{getTableTitle()}</h2>
         </div>
-        <p className="table-subtitle">
-          {getTableSubtitle()} • Total Records: {data.length}
-        </p>
+        <div className="table-info-row">
+          <p className="table-subtitle">{getTableSubtitle()}</p>
+          <p className="table-records">{handleRecords()} • Total Records: {data.length}</p>
+        </div>
+
       </div>
       
       <div className="table-wrapper">
@@ -251,11 +291,11 @@ const DataTable = ({ filterUrl, activeFilters }) => {
             {getTableHeaders()}
           </thead>
           <tbody>
-            {data.length > 0 ? (
-              data.map((row, idx) => getTableRow(row, idx))
+            {getCurrentPageData().length > 0 ? (
+              getCurrentPageData().map((row, idx) => getTableRow(row, idx))
             ) : (
               <tr>
-                <td colSpan={activeFilters?.dataType === 'Price' ? 7 : 11} className="text-center">
+                <td colSpan={activeFilters?.dataType === 'Price' ? 15 : 20} className="text-center">
                   No data available for the selected filters
                 </td>
               </tr>
@@ -263,6 +303,37 @@ const DataTable = ({ filterUrl, activeFilters }) => {
           </tbody>
         </table>
       </div>
+      {/* Pagination */}
+      {totalRecords > rowsPerPage && (
+        <div className="pagination-container">
+          <div className="pagination-info">
+            <span>Total Rows: {getCurrentPageData().length}</span>
+            <span>•</span>
+            <span>Total Records: {totalRecords}</span>
+          </div>
+          <div className="pagination-controls">
+            <button
+              className={`pagination-btn ${currentPage === 1 ? 'disabled' : ''}`}
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+            >
+              <ChevronLeft className="pagination-icon" />
+              Prev
+            </button>
+            <span className="pagination-current">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              className={`pagination-btn ${currentPage === totalPages ? 'disabled' : ''}`}
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              Next
+              <ChevronRight className="pagination-icon" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

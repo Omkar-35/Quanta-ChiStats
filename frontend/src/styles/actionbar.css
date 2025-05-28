@@ -1,6 +1,6 @@
 .action-bar {
-  margin-top: 4px;
-  margin-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: -10px;
   padding: 0; /* Slightly wider padding */
   background-color: #ffffff;
   border-radius: 14px; /* slightly more rounded */
@@ -15,7 +15,7 @@
   gap: 1rem;
   border: 1px solid #e0e0e0; /* subtle border for structure */
   transition: box-shadow 0.3s ease;
-  height: 70px;
+  height: 53px !important;
 }
 
 .best-view-container {
@@ -49,7 +49,7 @@
 }
 
 .underlying-index {
-  font-size: 1.1rem;
+  font-size: 1rem;
   white-space: nowrap;
   color: #0d47a1; /* navy blue for label */
   font-weight: 600;
@@ -62,7 +62,7 @@
 }
 
 .as-on {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   color: #6c757d; /* medium gray */
   margin-left: -5px;
   font-style: italic;
@@ -76,9 +76,9 @@
   border: none;
   background: transparent;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   cursor: pointer;
-  padding: 0.3rem 0.6rem;
+  padding: 0.2rem 0.5rem;
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
   color: #0d47a1;
@@ -98,7 +98,7 @@
 }
 
 .btn-icon-text .icon {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* Right section */
@@ -121,9 +121,9 @@
   align-items: center;
   gap: 0.4rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   border-radius: 8px;
-  padding: 0.4rem 0.9rem;
+  padding: 0.3rem 0.8rem;
   border: 1.5px solid transparent;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -162,7 +162,7 @@
 .terms-btn .icon,
 .bestview-btn .icon,
 .download-btn .icon {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 /* Responsive tweaks */
@@ -187,9 +187,9 @@
   align-items: center;
   gap: 0.4rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   border-radius: 8px;
-  padding: 0.4rem 0.9rem;
+  padding: 0.3rem 0.8rem;
   border: 1.5px solid transparent;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;

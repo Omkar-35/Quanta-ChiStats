@@ -8,13 +8,21 @@
   background-color: #ffffff;
   border-bottom: 1px solid #dee2e6;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  height: 90px;
 }
 
+/* Adjusted to reduce height taken up by header */
+body,
+main,
+.app-content {
+  padding-top: 65px; /* Adjusted for reduced header height */
+}
 
 .center-logo {
   position: absolute;
   left: 21%;
   transform: translateX(-50%);
+  margin-top: -5px;
 }
 
 .left-logo {
@@ -22,20 +30,13 @@
   margin-left: -5px;
 }
 
-/* Ensure space below the header is added in layout */
-body,
-main,
-.app-content {
-  padding-top: 90px; /* Adjust based on actual header height */
-}
-
-
+/* Smaller gradient text */
 .logo h3 {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight: 900;
-  font-size: 2.4rem;
-  background: linear-gradient(90deg, #0a0a0a, #1e2a38, #0a0a0a); /* deep black to navy blue */
+  font-size: 1.7rem; /* Reduced from 2.4rem */
+  background: linear-gradient(90deg, #0a0a0a, #1e2a38, #0a0a0a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: darkPulse 2s infinite ease-in-out, shine 4s infinite linear;
@@ -51,16 +52,17 @@ main,
   }
 }
 
-
+/* Reduced image size */
 .nse-logo {
-  height: 80px;
-  width: 80px;
+  height: 100px;  /* Reduced from 80px */
+  width: 60px;   /* Reduced from 80px */
   flex-shrink: 0;
   object-fit: contain;
-  margin-top: -50px;
-  margin-right: -75px;
+  margin-top: -45px;
+  margin-right: -60px;
 }
 
+/* Smaller datetime text */
 .datetime {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #495057;
@@ -69,20 +71,21 @@ main,
 
 .datetime .date {
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.75rem; /* Reduced from 0.95rem */
   color: #343a40;
 }
 
 .datetime .time {
-  font-size: 1.15rem;
+  font-size: 0.95rem; /* Reduced from 1.15rem */
   font-weight: 700;
   color: #212529;
 }
 
+/* Smaller NSE data text */
 .nifty-data {
-  margin-top: 6px;
+  margin-top: -4px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem; /* Reduced from 1.2rem */
   font-weight: 700;
 }
 
@@ -91,16 +94,17 @@ main,
 }
 
 .text-success {
-  color: #28a745; /* green */
+  color: #28a745;
 }
 
 .text-danger {
-  color: #dc3545; /* red */
+  color: #dc3545;
 }
 
+/* Fixed and reduced height for vertical rule */
 .vr {
   width: 1px;
   background-color: #ced4da;
-  height: 90 px;
+  height: 50px; /* Fixed and smaller */
   align-self: stretch;
 }

@@ -60,7 +60,7 @@ async def get_nse_market_status():
 
 @app.get("/call/optionschain/5", response_model=List[Options_Chain_Data_Schema])
 def get_call_options_chain_050(db: Session = Depends(get_call_db)):
-    return db.query(OptionsChainData_0_5_0).order_by(OptionsChainData_0_5_0.Datetime.desc()).limit(30).all()
+    return db.query(OptionsChainData_0_5_0).order_by(OptionsChainData_0_5_0.Datetime.desc()).all()
 
 @app.get("/filter/call/optionschain/1", response_model=List[Options_Chain_Data_Schema])
 def filter_call_options_chain_010(start: str, end: str, db: Session = Depends(get_call_db)):
@@ -69,7 +69,7 @@ def filter_call_options_chain_010(start: str, end: str, db: Session = Depends(ge
     
     return db.query(OptionsChainData_0_1_0).filter(
         OptionsChainData_0_1_0.Date.between(start_date, end_date)
-    ).order_by(OptionsChainData_0_1_0.Date.desc()).limit(30).all()
+    ).order_by(OptionsChainData_0_1_0.Date.desc()).all()
 
 @app.get("/filter/call/optionschain/5", response_model=List[Options_Chain_Data_Schema])
 def filter_call_options_chain_050(start: str, end: str, db: Session = Depends(get_call_db)):
@@ -78,7 +78,7 @@ def filter_call_options_chain_050(start: str, end: str, db: Session = Depends(ge
     
     return db.query(OptionsChainData_0_5_0).filter(
         OptionsChainData_0_5_0.Date.between(start_date, end_date)
-    ).order_by(OptionsChainData_0_5_0.Date.desc()).limit(30).all()
+    ).order_by(OptionsChainData_0_5_0.Date.desc()).all()
 
 @app.get("/filter/call/price/1", response_model=List[Price_Data_Schema])
 def filter_call_price_010(start: str, end: str, db: Session = Depends(get_call_db)):
@@ -87,7 +87,7 @@ def filter_call_price_010(start: str, end: str, db: Session = Depends(get_call_d
     
     return db.query(PriceData_0_1_0).filter(
         PriceData_0_1_0.Date.between(start_date, end_date)
-    ).order_by(PriceData_0_1_0.Date.desc()).limit(30).all()
+    ).order_by(PriceData_0_1_0.Date.desc()).all()
 
 
 @app.get("/filter/call/price/5", response_model=List[Price_Data_Schema])
@@ -97,14 +97,14 @@ def filter_call_price_010(start: str, end: str, db: Session = Depends(get_call_d
     
     return db.query(PriceData_0_5_0).filter(
         PriceData_0_5_0.Date.between(start_date, end_date)
-    ).order_by(PriceData_0_5_0.Date.desc()).limit(30).all()
+    ).order_by(PriceData_0_5_0.Date.desc()).all()
 
 
 # ======== Put Database ======== #
 
 @app.get("/put/optionschain/5", response_model=List[Options_Chain_Data_Schema])
 def get_put_options_chain_050(db: Session = Depends(get_put_db)):
-    return db.query(OptionsChainData_0_5_0).order_by(OptionsChainData_0_5_0.Datetime.desc()).limit(30).all()
+    return db.query(OptionsChainData_0_5_0).order_by(OptionsChainData_0_5_0.Datetime.desc()).all()
 
 @app.get("/filter/put/optionschain/1", response_model=List[Options_Chain_Data_Schema])
 def filter_put_options_chain_010(start: str, end: str, db: Session = Depends(get_put_db)):
@@ -113,7 +113,7 @@ def filter_put_options_chain_010(start: str, end: str, db: Session = Depends(get
     
     return db.query(OptionsChainData_0_1_0).filter(
         OptionsChainData_0_1_0.Date.between(start_date, end_date)
-    ).order_by(OptionsChainData_0_1_0.Date.desc()).limit(30).all()
+    ).order_by(OptionsChainData_0_1_0.Date.desc()).all()
 
 @app.get("/filter/put/optionschain/5", response_model=List[Options_Chain_Data_Schema])
 def filter_put_options_chain_050(start: str, end: str, db: Session = Depends(get_put_db)):
@@ -122,7 +122,7 @@ def filter_put_options_chain_050(start: str, end: str, db: Session = Depends(get
     
     return db.query(OptionsChainData_0_5_0).filter(
         OptionsChainData_0_5_0.Date.between(start_date, end_date)
-    ).order_by(OptionsChainData_0_5_0.Date.desc()).limit(30).all()
+    ).order_by(OptionsChainData_0_5_0.Date.desc()).all()
 
 @app.get("/filter/put/price/1", response_model=List[Price_Data_Schema])
 def filter_put_price_010(start: str, end: str, db: Session = Depends(get_put_db)):
@@ -131,7 +131,7 @@ def filter_put_price_010(start: str, end: str, db: Session = Depends(get_put_db)
     
     return db.query(PriceData_0_1_0).filter(
         PriceData_0_1_0.Date.between(start_date, end_date)
-    ).order_by(PriceData_0_1_0.Date.desc()).limit(30).all()
+    ).order_by(PriceData_0_1_0.Date.desc()).all()
 
 
 @app.get("/filter/put/price/5", response_model=List[Price_Data_Schema])
@@ -141,4 +141,4 @@ def filter_put_price_010(start: str, end: str, db: Session = Depends(get_put_db)
     
     return db.query(PriceData_0_5_0).filter(
         PriceData_0_5_0.Date.between(start_date, end_date)
-    ).order_by(PriceData_0_5_0.Date.desc()).limit(30).all()
+    ).order_by(PriceData_0_5_0.Date.desc()).all()

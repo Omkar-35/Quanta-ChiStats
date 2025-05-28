@@ -9,6 +9,13 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+.data-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(135deg, #2579be 0%, #001f5b 100%);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
 .data-table {
   width: 100%;
@@ -103,8 +110,8 @@
 .title-container {
   margin-top: -25px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   margin-bottom: 0.5px;
 }
 
@@ -113,30 +120,38 @@
   margin-right: 0.75rem;
   height: 24px;
   width: 24px;
+  align-items: left !important;
+  margin-left: -13px;
 }
 
 .table-title {
-  font-size: 1.75rem;
+  font-size: 18px;
   font-weight: 700;
   color: #000000;
-  margin: 0;
+  margin-left: -3px;
   letter-spacing: -0.025em;
+  margin-bottom: -5px;
   /* background: linear-gradient(to right, #1e293b, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text; */
 }
 
-.table-subtitle {
-  font-size: 1rem;
+.table-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem;
+  margin-bottom: -15px;
+}
+
+.table-subtitle,
+.table-records {
+  font-size: 0.95rem;
   color: #64748b;
   margin: 0;
-  margin-left: 60px;
   font-weight: 400;
-  max-width: 90%;
-  justify-content: center !important;
-  align-items: center !important;
-  margin-bottom: -5px;
+  max-width: 45%;
 }
 
 
@@ -165,5 +180,103 @@
   .data-table th,
   .data-table td {
     padding: 0.5rem 0.75rem;
+  }
+}
+
+.table-wrapper {
+  max-height: calc(100vh - 200px); /* Adjust based on your navbar + filters height */
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  position: relative;
+}
+
+
+/* Ensure proper spacing when in best view mode */
+.App.best-view .table-wrapper {
+  max-height: calc(100vh - 100px); /* Less height reduction when navbar is hidden */
+}
+
+
+/* Pagination Styles */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  border-radius: 0 0 8px 8px;
+}
+
+.pagination-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pagination-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border: 1px solid #dee2e6;
+  background-color: white;
+  color: #495057;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(.disabled) {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.pagination-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f8f9fa;
+}
+
+.pagination-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.pagination-current {
+  font-size: 14px;
+  font-weight: 500;
+  color: #495057;
+  padding: 8px 12px;
+}
+
+/* Responsive pagination */
+@media (max-width: 768px) {
+  .pagination-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .pagination-info {
+    order: 2;
+  }
+  
+  .pagination-controls {
+    order: 1;
   }
 }

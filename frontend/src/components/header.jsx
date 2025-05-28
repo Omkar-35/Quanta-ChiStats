@@ -74,7 +74,7 @@ const Header = () => {
         <img
           src="/quanta.png"
           alt="Quanta Logo"
-          style={{ height: '100px', width: 'auto' }}
+          style={{ height: '60px', width: 'auto' }}
         />
       </div>
 

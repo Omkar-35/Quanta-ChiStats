@@ -53,3 +53,11 @@
   height: calc(100vh - 80px); /* adjust based on actionbar height */
   overflow: auto;
 }
+
+.App:not(.best-view) .data-table-container {
+  margin-top: 10px; /* Small gap below the action bar */
+}
+
+.App.best-view .data-table-container {
+  margin-top: 0;
+}
