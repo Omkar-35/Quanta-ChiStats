@@ -1,5 +1,5 @@
 .action-bar {
-  margin-top: 0;
+  margin-top: 4px;
   margin-bottom: 0;
   padding: 0; /* Slightly wider padding */
   background-color: #ffffff;
@@ -15,10 +15,12 @@
   gap: 1rem;
   border: 1px solid #e0e0e0; /* subtle border for structure */
   transition: box-shadow 0.3s ease;
+  height: 70px;
 }
 
 .best-view-container {
-  position: fixed;
+  position: absolute;
+  margin-top: -20px;
   top: 0;
   left: 0;
   width: 100vw;
@@ -42,6 +44,8 @@
   gap: 1.5rem; /* increased gap */
   flex-wrap: wrap;
   min-width: 280px;
+  margin-left: 5px;
+  padding-left: 5px;
 }
 
 .underlying-index {
@@ -53,19 +57,19 @@
 
 .index-value {
   font-weight: 700;
-  margin-left: 0.3rem;
+  margin-left: -10px;
   color: #1a237e; /* deeper navy */
 }
 
 .as-on {
   font-size: 0.85rem;
   color: #6c757d; /* medium gray */
-  margin-left: 0.5rem;
+  margin-left: -5px;
   font-style: italic;
 }
 
 /* Refresh button */
-.btn-icon-text {
+.icon-btn {
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -82,6 +86,7 @@
   outline-offset: 2px;
   outline-color: transparent;
   outline-style: solid;
+  margin-left: -18px;
 }
 
 .btn-icon-text:focus,
@@ -104,6 +109,8 @@
   flex-wrap: wrap;
   min-width: 350px;
   justify-content: flex-end;
+  flex-direction: row !important;
+  padding-right: 2px;
 }
 
 /* Terms of Use, Best View, Download button styles */
@@ -187,6 +194,8 @@
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   user-select: none;
+  padding-right: 10px;
+  margin-right: 8px;
 
   /* Choose a distinct but harmonious color, e.g., deep purple */
   color: #6a1b9a;

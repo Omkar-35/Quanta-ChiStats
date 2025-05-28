@@ -1,93 +1,112 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import '../styles/actionbar.css';
 import { FaSyncAlt, FaFileCsv, FaGavel } from 'react-icons/fa';
 import { FiMaximize } from 'react-icons/fi';
 
 const ActionBar = ({ viewMode, onToggleView, isBestView, onToggleBestView }) => {
-  // Initial static data
-  const initialData = {
+  const [data, setData] = useState({
     underlyingIndex: 'NIFTY',
-    value: 24813.45,
-    timestamp: '21-May-2025 15:30:00 IST',
-  };
+    value: 0,
+    timestamp: '',
+  });
+  const [showTermsModal, setShowTermsModal] = useState(false);
 
-  // Simulated "live" data for refresh
-  const liveDataSamples = [
-    { value: 24850.12, timestamp: '21-May-2025 15:31:00 IST' },
-    { value: 24795.67, timestamp: '21-May-2025 15:32:00 IST' },
-    { value: 24820.89, timestamp: '21-May-2025 15:33:00 IST' },
-  ];
+  const fetchLiveData = async () => {
+  try {
+    const response = await fetch('http://localhost:8000/api/nse-market-status');
+    const json = await response.json();
 
-  const [data, setData] = React.useState(initialData);
-  const [showTermsModal, setShowTermsModal] = React.useState(false);
+    // Find Capital Market entry with NIFTY 50 index
+    const marketData = json.marketState.find(
+      item => item.market === 'Capital Market' && item.index === 'NIFTY 50'
+    );
 
-  // Refresh handler
-  const handleRefresh = () => {
-    const randomSample = liveDataSamples[Math.floor(Math.random() * liveDataSamples.length)];
-    setData((prev) => ({
-      ...prev,
-      value: randomSample.value,
-      timestamp: randomSample.timestamp,
-    }));
-  };
+    if (marketData) {
+      setData({
+        underlyingIndex: marketData.index,
+        value: parseFloat(marketData.last),
+        timestamp: marketData.tradeDate, // Correct field from your JSON
+      });
+    } else {
+      console.warn('NIFTY 50 data not found in marketState.');
+    }
+  } catch (error) {
+    console.error('Failed to fetch live data:', error);
+  }
+};
 
-  // Terms modal handlers
-  const handleShowTerms = () => setShowTermsModal(true);
-  const handleCloseTerms = () => setShowTermsModal(false);
 
-  // CSV Download handler
-  const handleDownloadCSV = () => {
-    const link = document.createElement('a');
-    link.href = process.env.PUBLIC_URL + '/sample-data.csv';
-    link.download = 'filtered-data.csv';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  useEffect(() => {
+    fetchLiveData();
+    const interval = setInterval(fetchLiveData, 5 * 60 * 1000); // every 5 minutes
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleDownloadCSV = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/call/optionschain/5');
+      if (!response.ok) throw new Error('Failed to fetch full data');
+      const fullData = await response.json();
+
+      if (!Array.isArray(fullData) || fullData.length === 0) {
+        console.warn('No data available for download.');
+        return;
+      }
+
+      const csvContent = [
+        Object.keys(fullData[0]).join(','), // Header row
+        ...fullData.map(row =>
+          Object.values(row).map(val => `"${(val ?? '').toString().replace(/"/g, '""')}"`).join(',')
+        ),
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'options_chain_data.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Error downloading CSV:', error);
+    }
   };
 
   return (
     <>
-      <div className="action-bar d-flex justify-content-between align-items-center p-3 border rounded shadow-sm bg-white">
-        <div className="d-flex align-items-center nifty-info">
-          <strong>Underlying Index : {data.underlyingIndex} {data.value.toFixed(2)}</strong>
-          <span className="ms-3">As on {data.timestamp}</span>
-          <button className="btn refresh-btn ms-3" onClick={handleRefresh} title="Refresh NIFTY data">
+      <div className={`action-bar ${isBestView ? 'best-view-only' : ''}`}>
+        <div className="left-section">
+          <div className='underlying-index'>{data.underlyingIndex}:</div> 
+          <div className='index-value'>{data.value.toFixed(2)}</div>
+          <span className='as-on'>As on {data.timestamp}</span>
+          <button className="icon-btn" onClick={fetchLiveData} title="Refresh NIFTY data">
             <FaSyncAlt />
           </button>
         </div>
 
-        <div className="d-flex align-items-center action-buttons">
-          <button className="btn terms-btn me-3 d-flex align-items-center" onClick={handleShowTerms}>
-            <FaGavel className="me-1" />
-            Terms of Use
+        <div className="right-section">
+          <button className="terms-btn" onClick={() => setShowTermsModal(true)}>
+            <FaGavel /> Terms
           </button>
-
-          <button className="btn best-view-btn me-3 d-flex align-items-center" onClick={onToggleBestView}>
-            <FiMaximize className="me-1" />
-            {isBestView ? 'Exit Best View' : 'Best View'}
+          <button className="bestview-btn" onClick={onToggleBestView}>
+            <FiMaximize /> {isBestView ? 'Exit Best View' : 'Best View'}
           </button>
-
-          <button className="btn download-btn me-3 d-flex align-items-center" onClick={handleDownloadCSV}>
-            <FaFileCsv className="me-1" />
-            Download (.csv)
+          <button className="download-btn" onClick={handleDownloadCSV}>
+            <FaFileCsv /> Download CSV
           </button>
-
-          <button className="btn toggle-view-btn d-flex align-items-center" onClick={onToggleView}>
-            {viewMode === 'table' ? 'Switch to Chart View' : 'Switch to Table View'}
+          <button className="toggle-view-btn" onClick={onToggleView}>
+            {viewMode === 'table' ? 'Chart View' : 'Table View'}
           </button>
         </div>
       </div>
 
-      {/* Terms of Use Modal */}
-      <Modal show={showTermsModal} onHide={handleCloseTerms} centered>
+      <Modal show={showTermsModal} onHide={() => setShowTermsModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Terms of Use</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>
-            These are the terms of use of this application. Please read carefully before using.
-          </p>
+          <p>Please read the terms carefully before using this application.</p>
         </Modal.Body>
       </Modal>
     </>

@@ -13,8 +13,13 @@
 
 .center-logo {
   position: absolute;
-  left: 38%;
+  left: 21%;
   transform: translateX(-50%);
+}
+
+.left-logo {
+  margin-top: -40px;
+  margin-left: -5px;
 }
 
 /* Ensure space below the header is added in layout */
@@ -48,10 +53,12 @@ main,
 
 
 .nse-logo {
-  height: 45px;
-  width: 60px;
+  height: 80px;
+  width: 80px;
   flex-shrink: 0;
   object-fit: contain;
+  margin-top: -50px;
+  margin-right: -75px;
 }
 
 .datetime {
@@ -96,10 +103,4 @@ main,
   background-color: #ced4da;
   height: 90 px;
   align-self: stretch;
-}
-
-.nse-logo {
-  height: 45px;
-  width: auto;
-  object-fit: contain;
 }
